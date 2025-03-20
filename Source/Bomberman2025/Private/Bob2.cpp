@@ -12,7 +12,7 @@ ABob2::ABob2()
 	Mesh =CreateDefaultSubobject<UStaticMeshComponent>("BaseMeshComponent"); //creamos un componente para el actor
 	RootComponent = Mesh;
 
-	auto MeshAsset =ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("/Script/Engine.StaticMesh'/Game/Hechos/Pokeball/Pokeball.Pokeball'"));
+	auto MeshAsset =ConstructorHelpers::FObjectFinder<UStaticMesh>(TEXT("/Script/Engine.StaticMesh'/Game/LevelPrototyping/Meshes/SM_Cube.SM_Cube'"));
 			if (MeshAsset.Object != nullptr)
 			{
 				Mesh->SetStaticMesh(MeshAsset.Object);

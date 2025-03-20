@@ -6,14 +6,15 @@
 #include "GameFramework/GameModeBase.h"
 #include "Bomberman2025GameMode.generated.h"
 
-UCLASS(minimalapi)
+UCLASS()
 class ABomberman2025GameMode : public AGameModeBase
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
 public:
-	ABomberman2025GameMode();
+    ABomberman2025GameMode();
+
+public:
+    virtual void BeginPlay() override;
+   
 };
-
-
-

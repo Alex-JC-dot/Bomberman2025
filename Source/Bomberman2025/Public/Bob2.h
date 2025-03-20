@@ -23,5 +23,5 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 	UPROPERTY() //macro para inicializar variables
-	UStaticMeshComponent* Mesh; // 
+	UStaticMeshComponent* Mesh; // puntero
 };

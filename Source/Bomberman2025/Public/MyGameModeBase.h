@@ -11,6 +11,8 @@ UCLASS()
 class BOMBERMAN2025_API AMyGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+public:
+	AMyGameModeBase();
 	public:
     virtual void BeginPlay() override;
 public:
@@ -19,4 +21,5 @@ public:
 	ABloque* SpawnedActor;
 	UFUNCTION()
 	void DestroyActorFunction();
+	FTimerHandle TimerHandle;
 };

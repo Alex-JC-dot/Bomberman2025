@@ -2,20 +2,39 @@
 
 #include "Bloque.h"
 #include "MyGameModeBase.h"
-
+AMyGameModeBase::AMyGameModeBase()
+{
+	// set default pawn class to our Blueprinted character
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPerson/Blueprints/BP_ThirdPersonCharacter"));
+	if (PlayerPawnBPClass.Class != NULL)
+	{
+		DefaultPawnClass = PlayerPawnBPClass.Class;
+	}
+}
 void AMyGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
-	GEngine->AddOnScreenDebugMessage(-1, -1, FColor::Red,
-		TEXT("Aparecio el ACTOOR"));
-	FTransform SpawnLocation;
-	GetWorld()->SpawnActor<ABloque>(
-		ABloque::StaticClass(), SpawnLocation);
-	FTimerHandle Timer;
-	SpawnedActor = GetWorld()->SpawnActor<ABloque>
-		(ABloque::StaticClass(), SpawnLocation);
-	GetWorldTimerManager().SetTimer(Timer, this,
-		&AMyGameModeBase::DestroyActorFunction, 10.0f, false);
+	GEngine->AddOnScreenDebugMessage(-1, -1, FColor::Red, TEXT("Aparecio el ACTOOR"));
+
+	FVector SpawnPosition = FVector(200.0f, 300.0f, 100.0f);
+	FRotator SpawnRotation = FRotator::ZeroRotator;
+	FTransform SpawnTransform(SpawnRotation, SpawnPosition);
+	if (GetWorld())
+	{
+		if (SpawnedActor)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT("Bloque Spawned correctamente!"));
+			GetWorldTimerManager().SetTimer(TimerHandle, this, &AMyGameModeBase::DestroyActorFunction, 10.0f, false);
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, TEXT("Fallo al spawnear Bloque."));
+		}
+
+		SpawnedActor = GetWorld()->SpawnActor<ABloque>(ABloque::StaticClass(), SpawnTransform);
+
+	}
+
 };
 void AMyGameModeBase::DestroyActorFunction()
 {
